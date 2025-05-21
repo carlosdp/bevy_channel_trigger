@@ -47,6 +47,7 @@ fn process_events<T: Event>(receiver: Option<Res<EventReceiver<T>>>, mut command
                 Err(TryRecvError::Disconnected) => {
                     error!("sender dropped, removing receiver");
                     commands.remove_resource::<EventReceiver<T>>();
+                    break;
                 }
                 Err(TryRecvError::Empty) => {
                     break;
